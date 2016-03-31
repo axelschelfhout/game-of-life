@@ -1,14 +1,17 @@
 from numpy import genfromtxt
 
-data = genfromtxt('game-of-life-input1.csv', delimiter=',')
-
+#data = genfromtxt('game-of-life-input1.csv', delimiter=',')
+data = genfromtxt('example.csv', delimiter=',')
 
 def gameoflife(data):
+
     dead = 0
     alive = 1
 
     amount_of_rows = len(data)
     row_counter = 0
+
+    new_data = [[0 for i in range(amount_of_rows)] for j in range(len(data[0]))]
 
     for row in data:
 
@@ -106,9 +109,7 @@ def gameoflife(data):
                     else:
                         cell = dead
 
-                    # print(data[row_counter][cell_counter])
-                    data[row_counter][cell_counter] = cell
-                    # print(data[row_counter][cell_counter])
+                    new_data[row_counter][cell_counter] = cell
 
                     out = '*'
                     if cell == dead:
@@ -118,9 +119,10 @@ def gameoflife(data):
                     cell_counter += 1
             print(printer)
         row_counter += 1
-    return data
+    return new_data
 
 i = 0
 while i < 10:
     data = gameoflife(data)
     i += 1
+    print(str(i))
