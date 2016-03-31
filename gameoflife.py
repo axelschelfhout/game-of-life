@@ -1,7 +1,7 @@
 from numpy import genfromtxt
 
-#data = genfromtxt('game-of-life-input1.csv', delimiter=',')
-data = genfromtxt('example.csv', delimiter=',')
+data = genfromtxt('game-of-life-input1.csv', delimiter=',')
+#data = genfromtxt('example.csv', delimiter=',')
 
 def gameoflife(data):
 
@@ -11,10 +11,10 @@ def gameoflife(data):
     amount_of_rows = len(data)
     row_counter = 0
 
-    new_data = [[0 for i in range(amount_of_rows)] for j in range(len(data[0]))]
+    # Create new matrix to put the new cell states in
+    new_data = [[0 for col in range(amount_of_rows)] for row in range(len(data[0]))]
 
     for row in data:
-
         row = list(map(int, row))  # Parse row to int
 
         if row_counter < amount_of_rows:
@@ -102,7 +102,7 @@ def gameoflife(data):
                         dead_neighbours += 1
 
                     # Check if the cell should be alive or dead
-                    if cell == alive and 2 >= alive_neighbours <= 3:
+                    if cell == alive and alive_neighbours == 2 or alive_neighbours == 3:
                         cell = alive
                     elif cell == dead and alive_neighbours == 3:
                         cell = alive
@@ -125,4 +125,3 @@ i = 0
 while i < 10:
     data = gameoflife(data)
     i += 1
-    print(str(i))
