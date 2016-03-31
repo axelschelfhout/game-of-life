@@ -1,4 +1,30 @@
 from numpy import genfromtxt
+import time
+import sys
+
+# Take in arguments from command line.
+error = 0
+iterations = 100
+delay = 0
+if len(sys.argv) > 1 < 4:
+    try:
+        iterations = int(sys.argv[1])
+    except ValueError:
+        error = 1
+        print("The first argument should be used to give the amount of iterations you want to run. Defaults to 100")
+        print("This should be an int")
+
+    if len(sys.argv) == 3:
+        try:
+            delay = float(sys.argv[2])
+        except ValueError:
+            error = 1
+            print("The second argument is the amount of delay (in seconds) you want for the iterations. Defaults to 0")
+            print("This should be an int or float")
+
+    if error == 1:
+        exit()
+# END Take in arguments from command line.
 
 data = genfromtxt('game-of-life-input1.csv', delimiter=',')
 #data = genfromtxt('example.csv', delimiter=',')
@@ -99,6 +125,8 @@ def gameoflife(data):
     return new_data
 
 i = 0
-while i < 10:
+while i < iterations:
     data = gameoflife(data)
+    if delay > 0:
+        time.sleep(delay)
     i += 1
