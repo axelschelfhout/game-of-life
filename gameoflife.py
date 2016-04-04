@@ -29,11 +29,11 @@ if len(sys.argv) > 1 < 4:
 data = genfromtxt('game-of-life-input1.csv', delimiter=',')
 #data = genfromtxt('example.csv', delimiter=',')
 
+dead = 0
+alive = 1
 
-def gameoflife(data):
 
-    dead = 0
-    alive = 1
+def game_of_life(data):
 
     amount_of_rows = len(data)
     row_counter = 0
@@ -49,7 +49,6 @@ def gameoflife(data):
 
             row_length = len(row)
             cell_counter = 0
-            printer = ''
 
             for cell in row:
 
@@ -114,19 +113,27 @@ def gameoflife(data):
 
                     new_data[row_counter][cell_counter] = cell
 
-                    out = '*'
-                    if cell == dead:
-                        out = '.'
-
-                    printer += str(out)
                     cell_counter += 1
-            print(printer)
         row_counter += 1
     return new_data
 
+
+def print_game_of_life_on_data(input_data):
+    printer = ''
+    for row in input_data:
+        for cell in row:
+            out = '*'
+            if cell == dead:
+                out = '.'
+            printer += str(out)
+        printer += '\n'
+    return printer
+
+
 i = 0
 while i < iterations:
-    data = gameoflife(data)
+    print(print_game_of_life_on_data(data))
+    data = game_of_life(data)
     if delay > 0:
         time.sleep(delay)
     i += 1
