@@ -131,7 +131,7 @@ def print_game_of_life_on_data(input_data):
 
 
 i = 0
-while i < iterations:
+while i <= iterations:
     print(print_game_of_life_on_data(data))
     data = game_of_life(data)
     if delay > 0:
